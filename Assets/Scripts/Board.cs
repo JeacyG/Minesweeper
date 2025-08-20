@@ -31,6 +31,18 @@ public class Board : MonoBehaviour
         PlaceMines();
         AssignMineCount();
     }
+
+    public void ResetBoard()
+    {
+        StopAllCoroutines();
+        
+        foreach (Cell cell in cells)
+        {
+            Destroy(cell.gameObject);
+        }
+        
+        StartCoroutine(CreateBoard());
+    }
     
     private IEnumerator CreateCells()
     {
