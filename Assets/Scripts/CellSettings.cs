@@ -9,8 +9,10 @@ public class CellSettings : ScriptableObject
     public float hoverScaling;
     
     [Header("Sprites")]
+    public Sprite undiscoveredSprite;
     public Sprite emptySprite;
     public Sprite mineSprite;
+    public Sprite explodeSprite;
     public Sprite flagSprite;
     public Sprite oneSprite;
     public Sprite twoSprite;

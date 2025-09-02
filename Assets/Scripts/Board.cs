@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Color = UnityEngine.Color;
 
@@ -9,13 +10,18 @@ public class Board : MonoBehaviour
     [SerializeField, Range(0.0f, 2.0f)] private float spacing;
     [SerializeField] private GameObject cellPrefab;
     [SerializeField] private float creationTime;
+    [SerializeField] private TextMeshProUGUI statusText;
 
     [SerializeField, Range(0.01f, 0.99f)] private float mineDensity;
     
     private Cell[,] cells;
+    
+    private int minesCount = 0;
+    private int closedCount = 0;
 
     private void Awake()
     {
+        closedCount = gridSize.x * gridSize.y;
         cells = new Cell[gridSize.x, gridSize.y];
     }
 
@@ -41,6 +47,9 @@ public class Board : MonoBehaviour
             Destroy(cell.gameObject);
         }
         
+        closedCount = gridSize.x * gridSize.y;
+        statusText.text = "Playing";
+        
         StartCoroutine(CreateBoard());
     }
     
@@ -62,14 +71,14 @@ public class Board : MonoBehaviour
 
     private void PlaceMines()
     {
-        int minesCount = Mathf.RoundToInt(gridSize.x * gridSize.y * mineDensity);
+        minesCount = Mathf.RoundToInt(gridSize.x * gridSize.y * mineDensity);
 
         for (int i = 0; i < minesCount;)
         {
             Cell cell = cells[Random.Range(0, gridSize.x), Random.Range(0, gridSize.y)];
             if (!cell.IsMine)
             {
-                cell.IsMine = true;
+                cell.SetMine();
                 i++;
             }
         }
@@ -89,7 +98,7 @@ public class Board : MonoBehaviour
                 {
                     if (cells[neighbours[i].x, neighbours[i].y].IsMine)
                     {
-                        cells[x, y].MineCount++;
+                        cells[x, y].SetMineCount(cells[x, y].MineCount + 1);
                     }
                 }
             }
@@ -125,7 +134,20 @@ public class Board : MonoBehaviour
         if (cell.IsOpen)
             return;
         
-        cell.IsOpen = true;
+        cell.Open();
+        closedCount--;
+
+        if (cell.IsMine)
+        {
+            GameOver();
+            return;
+        }
+
+        if (minesCount == closedCount)
+        {
+            GameWon();
+            return;
+        }
 
         if (cell.MineCount > 0)
             return;
@@ -134,6 +156,30 @@ public class Board : MonoBehaviour
         foreach (Vector2Int neighbour in neighbours)
         {
             OpenCell(neighbour);
+        }
+    }
+
+    private void GameWon()
+    {
+        statusText.text = "Win";
+        foreach (Cell cell in cells)
+        {
+            if (cell.IsMine)
+            {
+                cell.OpenWin();
+            }
+        }
+    }
+
+    private void GameOver()
+    {
+        statusText.text = "Lose";
+        foreach (Cell cell in cells)
+        {
+            if (!cell.IsOpen)
+            {
+                cell.Open();
+            }
         }
     }
 

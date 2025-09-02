@@ -16,3 +16,16 @@ MonoBehaviour:
   openColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
   hoverScaling: 1.1
+  undiscoveredSprite: {fileID: -1332879510569577365, guid: fefb8717d0238dc4aa0f484bf942e64d, type: 3}
+  emptySprite: {fileID: 8995154407686431259, guid: a8b8cada20000b649a40d8ad4bbfe76b, type: 3}
+  mineSprite: {fileID: 4576716241012234591, guid: 30be3ecee8aa22844b914ca381c36591, type: 3}
+  explodeSprite: {fileID: -5448159781167531963, guid: db63c0ef9a70c8b4889bd26ae5ea8e35, type: 3}
+  flagSprite: {fileID: 1805158079502305607, guid: 77ca9c9d54a406d42bf035070251be0f, type: 3}
+  oneSprite: {fileID: 3635896052096531977, guid: 4165bc3c3c0d84649a669420de5c11ae, type: 3}
+  twoSprite: {fileID: -6764560381244970214, guid: 99c048a101ecd194da02fd6e5b09fa94, type: 3}
+  threeSprite: {fileID: -4217495493287558108, guid: 6a87c70a6ade7604e93b2629d7bea23e, type: 3}
+  fourSprite: {fileID: 4716983578401895832, guid: b6f18da1d385dff4d8e1c88aefb4f913, type: 3}
+  fiveSprite: {fileID: 1566570246301157487, guid: ebcda2613ee52ca469fcbf22294a7ec7, type: 3}
+  sixSprite: {fileID: 7792153380951505386, guid: 05f00fae601ee634f9be20c24ba96051, type: 3}
+  sevenSprite: {fileID: 1881159809122598383, guid: 1bb6075fdb7b06244a7c35367b32f40a, type: 3}
+  eightSprite: {fileID: 4241643753285238993, guid: 3f6185386ed393a4fab19dad1d0c5742, type: 3}
